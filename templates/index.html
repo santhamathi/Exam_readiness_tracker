@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Management System</title>
+
+<style>
+body {
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#f4f6f8;
+}
+
+/* ===== Header ===== */
+.top-header {
+    background:#8B4513; /* brown */
+    color:white;
+    padding:15px 20px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-header h1 {
+    margin:0;
+    font-size:24px;
+}
+
+.top-header nav a {
+    color:white;
+    margin-left:15px;
+    text-decoration:none;
+    font-weight: bold;
+}
+
+.top-header nav a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Homepage Cards ===== */
+.home-cards {
+    text-align: center;
+    padding:50px 20px;
+}
+
+.cards-container {
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-top:30px;
+}
+
+.card {
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    width:250px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    text-align:center;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    width:80px;
+    height:80px;
+    margin-bottom:15px;
+}
+
+.card h3 {
+    color:#8B4513; /* brown text */
+}
+
+.card p {
+    font-size:14px;
+    color:#555;
+}
+
+.card .btn {
+    display:inline-block;
+    margin-top:15px;
+    padding:10px 15px;
+    background:#8B4513;
+    color:white;
+    text-decoration:none;
+    border-radius:5px;
+    font-weight:bold;
+}
+
+.card .btn:hover {
+    background:#5c2f0c;
+}
+</style>
+
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header class="top-header">
+    <h1>Student Management System</h1>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Features</a>
+        <a href="#">Contact</a>
+    </nav>
+</header>
+
+<!-- ===== Homepage Cards ===== -->
+<main class="home-cards">
+    <h2>Welcome to the Student Management System</h2>
+    <p>Choose your dashboard to navigate and manage your activities</p>
+
+    <div class="cards-container">
+        <!-- Student -->
+        <div class="card">
+            <img src="images/student.png" alt="Student">
+            <h3>Student Dashboard</h3>
+            <p>Go to your personal dashboard</p>
+            <a href="student.html" class="btn">Go to Student Dashboard</a>
+        </div>
+
+        <!-- Faculty -->
+        <div class="card">
+            <img src="images/faculty.png" alt="Faculty">
+            <h3>Faculty Dashboard</h3>
+            <p>Manage student performance</p>
+            <a href="faculty.html" class="btn">Go to Faculty Dashboard</a>
+        </div>
+
+        <!-- Admin -->
+        <div class="card">
+            <img src="images/admin.png" alt="Admin">
+            <h3>Admin Dashboard</h3>
+            <p>Manage students & faculty</p>
+            <a href="admin.html" class="btn">Go to Admin Dashboard</a>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>
