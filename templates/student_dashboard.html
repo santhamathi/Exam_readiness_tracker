@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+</head>
+<body>
+
+<h2>Welcome {{ student[1] }}</h2>
+
+<p><b>Register No:</b> {{ student[2] }}</p>
+<p><b>Department:</b> {{ student[3] }}</p>
+<p><b>Semester:</b> {{ student[4] }}</p>
+
+<hr>
+
+<h3>Exam Readiness Score</h3>
+<h1>{{ score }}%</h1>
+<p>Status: <b>{{ status }}</b></p>
+
+<hr>
+
+<h3>Academic Summary</h3>
+<ul>
+    <li>Attendance: {{ student[6] }}%</li>
+    <li>Assignment Marks: {{ student[7] }}%</li>
+    <li>Mock Test Score: {{ student[8] }}%</li>
+    <li>Syllabus Completion: {{ student[9] }}%</li>
+</ul>
+
+<hr>
+
+<h3>Subject-wise Assignment Performance</h3>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Subject</th>
+        <th>Assignment Mark</th>
+    </tr>
+    {% for sub in subjects %}
+    <tr>
+        <td>{{ sub[0] }}</td>
+        <td>{{ sub[1] }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+<a href="/logout">Logout</a>
+
+</body>
+</html>
