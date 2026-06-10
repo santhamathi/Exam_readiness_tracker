@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Study Time Overview</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:#f4f1ec;
+}
+
+/* Header */
+.header{
+background:#8B4513;
+color:white;
+padding:15px 25px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+.header a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* Container */
+.container{
+max-width:1000px;
+margin:40px auto;
+}
+
+/* Card */
+.card{
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 6px 15px rgba(0,0,0,0.08);
+margin-bottom:25px;
+text-align:center;
+}
+
+
+/* Title */
+.title{
+font-size:22px;
+margin-bottom:15px;
+color:#8B4513;
+font-weight:bold;
+}
+
+/* Big Numbers */
+.big{
+font-size:40px;
+font-weight:bold;
+color:#333;
+}
+
+/* Buttons */
+.btn{
+padding:10px 20px;
+border-radius:6px;
+text-decoration:none;
+font-weight:bold;
+margin:5px;
+display:inline-block;
+color:white;
+border:none;
+cursor:pointer;
+}
+
+.start{
+background:#2e8b57;
+}
+
+.stop{
+background:#b22222;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+    <h2>Study Time Overview</h2>
+    <a href="/student_dashboard">← Back to Dashboard</a>
+</div>
+
+<div class="container">
+
+<!-- ✅ UPDATED BUTTONS -->
+
+<div style="text-align:center;margin-bottom:25px;">
+
+<button onclick="startStudy()" class="btn start">Start Study</button>
+
+<button onclick="stopStudy()" class="btn stop">Stop Study</button>
+
+</div>
+
+<!-- Today Study -->
+
+<div class="card">
+<div class="title">Today's Study Time ⏱️</div>
+<div class="big">{{ today_hours }} Min</div>
+</div>
+
+<!-- Weekly Study -->
+
+<div class="card">
+<div class="title">This Week Study Time 📅</div>
+<div class="big">{{ week_hours }} Hrs</div>
+</div>
+
+<!-- Goal -->
+
+<div class="card">
+<div class="title">Weekly Goal 🎯</div>
+
+<div class="big">{{ goal }} Hrs</div>
+
+<p>{{ goal_percent }}% Completed</p>
+
+<div style="background:#ddd;height:20px;border-radius:10px;">
+  <div style="width: {{ goal_percent }}%; background:#8B4513; height:100%; border-radius:10px;"></div>
+</div>
+
+</div>
+
+<!-- Weekly Chart -->
+
+<div class="card">
+<div class="title">Weekly Study Graph 📊</div>
+<canvas id="studyChart"></canvas>
+</div>
+
+<div class="card" style="background:linear-gradient(135deg,#ff7e5f,#feb47b); color:white;">
+    
+    <div class="title" style="color:white;">🔥 Study Streak</div>
+    
+    <div style="font-size:50px; font-weight:bold;">
+        {{ streak }}
+    </div>
+    
+    <div style="font-size:18px;">
+        Days
+    </div>
+
+    {% if streak >= 5 %}
+    <p style="margin-top:10px;">🔥 Awesome consistency!</p>
+    {% elif streak == 0 %}
+    <p style="margin-top:10px;">Start today 💪</p>
+    {% endif %}
+
+</div>
+
+</div>
+
+<!-- ✅ GRAPH SCRIPT -->
+
+<script>
+
+const ctx = document.getElementById('studyChart');
+
+new Chart(ctx,{
+type:'bar',
+data:{
+labels: {{ labels | tojson }},
+datasets:[{
+label:'Study Hours',
+data: {{ week_data | tojson }},
+backgroundColor:'#8B4513'
+}]
+},
+options:{
+scales:{
+y:{
+beginAtZero:true
+}
+}
+}
+});
+
+</script>
+
+<!-- ✅ START / STOP JS -->
+
+<script>
+
+function startStudy(){
+    fetch('/start_study')
+    .then(()=>{
+        location.reload();
+    });
+}
+
+function stopStudy(){
+    fetch('/stop_study')
+    .then(()=>{
+        location.reload();
+    });
+}
+
+</script>
+
+</body>
+</html>

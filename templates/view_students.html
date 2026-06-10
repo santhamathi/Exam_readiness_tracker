@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Students</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+        }
+        /* Header */
+.header{
+    background:#8B4513;
+    color:white;
+    padding:15px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.header a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+        form {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px;
+        }
+
+        select, button {
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: 1px solid #aaa;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #8B4513;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #8B4513;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: auto;
+            background: white;
+        }
+
+        th {
+            background-color: #8B4513;
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 8px;
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        a {
+            text-decoration: none;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #8B4513;
+        }
+
+        .edit-btn{
+    background:#8B4513;
+    color:white;
+    padding:6px 10px;
+    border-radius:5px;
+    font-size:13px;
+}
+
+.edit-btn:hover{
+    background:#8B4513;
+}
+    </style>
+</head>
+<body>
+<div class="header">
+    <h2>Students List</h2>
+    <a href="/faculty_dashboard">← Back to Dashboard</a>
+</div>
+
+
+<form method="POST">
+    
+
+    <select name="year">
+        <option value="">Year</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+    </select>
+
+    <select name="semester">
+        <option value="">Semester</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>   
+    </select>
+
+    <button type="submit">View Students</button>
+</form>
+
+<table>
+    <tr>
+        <th>Reg No</th>
+        <th>Name</th>
+        <th>Dept</th>
+        <th>Year</th>
+        <th>Sem</th>
+        <th>Action</th>
+    </tr>
+
+    {% for s in students %}
+    <tr>
+        <td>{{ s.reg_no }}</td>
+
+        <!-- NAME clickable -->
+        <td>
+            <a href="/student_details/{{ s.reg_no }}"> 
+            
+                {{ s.name }}
+            </a>
+        </td>
+
+        <td>{{ s.dept }}</td>
+        <td>{{ s.year }}</td>
+        <td>{{ s.semester }}</td>
+        <td><a href="/edit_marks/{{s.reg_no}}" class="edit-btn">Add/Edit Marks</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+</body>
+</html>

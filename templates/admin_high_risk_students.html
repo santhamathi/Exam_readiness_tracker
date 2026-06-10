@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>High Risk Students</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#f4f6f8;
+}
+
+/* Header */
+.top-header{
+    background:#8B4513;
+    color:white;
+    padding:15px 25px;
+    display:flex;
+    justify-content:space-between;
+}
+.top-header h1{
+    margin:0;
+    font-size:20px;
+    
+}
+.top-header a{
+    color:white;
+    text-decoration:none;
+}
+
+/* Container */
+.container{
+    padding:30px;
+    max-width:900px;
+    margin:auto;
+}
+
+h2{
+    color:#8B4513;
+}
+
+/* Table */
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    margin-top:20px;
+}
+
+th{
+    background:#8B4513;
+    color:white;
+}
+
+th,td{
+    padding:12px;
+    border:1px solid #ddd;
+    text-align:center;
+}
+
+/* Risk style */
+.high-risk{
+    color:red;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-header">
+    <h1>High Risk Students </h1>
+    <a href="/admin_dashboard">← Back to Dashboard</a>
+</div>
+
+<div class="container">
+
+<table>
+<tr>
+    <th>Name</th>
+    <th>Reg No</th>
+    <th>Average Mark</th>
+    <th>Status</th>
+</tr>
+
+{% for s in data %}
+<tr>
+    <td>{{ s[0] }}</td>
+    <td>{{ s[1] }}</td>
+    <td>{{ "%.2f"|format(s[2]) }}</td>
+    <td class="high-risk">High Risk</td>
+</tr>
+{% endfor %}
+
+{% if data|length == 0 %}
+<tr>
+    <td colspan="4">No High Risk Students 🎉</td>
+</tr>
+{% endif %}
+
+</table>
+
+</div>
+
+</body>
+</html>

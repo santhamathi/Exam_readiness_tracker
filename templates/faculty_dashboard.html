@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Faculty Dashboard</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:#f4f6f8;
+}
+
+/* Header */
+.top-header{
+    background:#8B4513;
+    color:white;
+    padding:15px 20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.top-header h1{
+    margin:0;
+    font-size:22px;
+}
+
+.top-header a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* Dashboard */
+.dashboard{
+    padding:40px;
+    max-width:600px;
+    margin:auto;
+    text-align:center;
+}
+
+.dashboard h2{
+    color:#8B4513;
+    margin-bottom:30px;
+}
+
+/* Buttons */
+.dash-btn{
+    display:block;
+    width:100%;
+    padding:15px;
+    margin:12px 0;
+    background:#8B4513;
+    color:white;
+    text-decoration:none;
+    border-radius:6px;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.dash-btn:hover{
+    background:#5c2f0c;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Header -->
+<header class="top-header">
+    <h1>Faculty Dashboard</h1>
+    <a href="/faculty_logout">Logout</a>
+</header>
+
+<!-- Dashboard Content -->
+<div class="dashboard">
+    <h2>Welcome, Faculty 👋</h2>
+
+    <a href="/view_students" class="dash-btn">View Students</a>
+    <a href="/select_subject" class="dash-btn">Enter / Update Marks</a>
+    <a href="/view_internal_marks" class="dash-btn">View Internal Marks</a>
+    <a href="/risk_students" class="dash-btn">Risk Students</a>
+    <a href="/upload_paper" class="dash-btn">Upload Question Paper</a>
+</div>
+
+</body>
+</html>

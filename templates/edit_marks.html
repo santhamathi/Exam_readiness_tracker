@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Edit Marks</title>
+<style>
+body{
+    font-family:Arial;
+    background:#f4f6f8;
+}
+
+.container{
+    max-width:700px;
+    margin:40px auto;
+    background:white;
+    padding:25px;
+    border-radius:10px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.1);
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+
+button{
+    padding:10px 20px;
+    background:#8B4513;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Edit Marks – {{ reg_no }}</h2>
+
+<form method="POST">
+    <select name="subject" required>
+<option value="">-- Select Subject --</option>
+
+<option>Programming in C</option>
+<option>Engineering Graphics</option>
+<option>Object Oriented Programming</option>
+<option>Computer Architecture</option>
+<option>Python Programming</option>
+<option>Database Management Systems</option>
+<option>Mobile Application Development</option>
+<option>C#</option>
+<option>Computer Networks</option>
+<option>Software Engineering</option>
+<option>Web Technology</option>
+<option>Data Mining</option>
+<option>Cloud Computing</option>
+<option>Business Intelligence</option>
+<option>Cyber Security</option>
+<option>Seminar</option>
+
+</select>
+    <input type="number" name="attendance" placeholder="Attendance (5)" required>
+    <input type="number" name="mock" placeholder="Mock (10)" required>
+    <input type="number" name="assignment" placeholder="Assignment (10)" required>
+    <input type="number" name="unit_percent" placeholder="Syllabus %" required>
+
+    <button type="submit">Save Marks</button>
+</form>
+
+<hr>
+
+<h3>Existing Subjects</h3>
+
+<table border="1" width="100%" cellpadding="8">
+<tr>
+<th>Subject</th>
+<th>Attendance</th>
+<th>Mock</th>
+<th>Assignment</th>
+<th>Syllabus %</th>
+</tr>
+
+{% for m in marks %}
+<tr>
+<td>{{ m[0] }}</td>
+<td>{{ m[1] }}</td>
+<td>{{ m[2] }}</td>
+<td>{{ m[3] }}</td>
+<td>{{ m[4] }}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>

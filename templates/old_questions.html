@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Previous Question Papers</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#f4f6f8;
+}
+
+/* Header */
+.header{
+    background:#8B4513;
+    color:white;
+    padding:15px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.header a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* Container */
+.container{
+    max-width:1000px;
+    margin:40px auto;
+}
+
+/* Table */
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    box-shadow:0 6px 15px rgba(0,0,0,0.1);
+}
+
+th{
+    background:#8B4513;
+    color:white;
+}
+
+th, td{
+    padding:12px;
+    text-align:center;
+    border:1px solid #ddd;
+}
+
+.view-btn{
+    background:#8B4513;
+    color:white;
+    padding:8px 14px;
+    text-decoration:none;
+    border-radius:6px;
+    font-weight:bold;
+}
+
+.view-btn:hover{
+    background:#5c2f0c;
+}
+
+/* Empty message */
+.no-data{
+    background:white;
+    padding:20px;
+    text-align:center;
+    color:red;
+    border-radius:10px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.1);
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h2>Previous Question Papers</h2>
+    <a href="/student_dashboard">← Back to Dashboard</a>
+</div>
+
+<div class="container">
+
+    {% if papers %}
+
+    <table>
+        <tr>
+            <th>Department</th>
+            <th>Semester</th>
+            <th>Subject</th>
+            <th>Exam Type</th>
+            <th>View</th>
+        </tr>
+
+        {% for paper in papers %}
+        <tr>
+            <td>{{ paper[4] }}</td>
+            <td>{{ paper[3] }}</td>
+            <td>{{ paper[0] }}</td>
+            <td>{{ paper[1] }}</td>
+            <td>
+                <a href="{{ url_for('static', filename='papers/' + paper[2]) }}"
+                   target="_blank"
+                   class="view-btn">
+                   View PDF
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+    {% else %}
+        <div class="no-data">
+            No question paper uploaded yet.
+        </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>

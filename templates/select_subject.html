@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Select Subject</title>
+<style>
+body{margin:0;font-family:Arial;background:#f4f6f8;}
+.top-header{
+    background:#8B4513;color:white;
+    padding:15px 20px;
+    display:flex;justify-content:space-between;
+}
+a{color:white;text-decoration:none;font-weight:bold;}
+.form-box{
+    max-width:500px;background:white;
+    margin:40px auto;padding:30px;
+    border-radius:10px;
+}
+h2{text-align:center;color:#8B4513;}
+select,input,button{
+    width:100%;padding:10px;margin:10px 0;
+}
+button{
+    background:#8B4513;color:white;
+    border:none;font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<div class="top-header">
+    <h2>Select Subject</h2>
+    <a href="/faculty_dashboard">Back</a>
+</div>
+
+<div class="form-box">
+<h2>Faculty Selection</h2>
+
+<form method="POST" action="/select_subject">
+    <label>Department</label>
+    <select name="dept" required>
+        <option value="">Select Department</option>
+        <option>CSE</option>
+        <option>ECE</option>
+        <option>IT</option>
+    </select>
+
+    <label>Year</label>
+    <select name="year" required>
+        <option value="">Select Year</option>
+        <option>1</option><option>2</option>
+        <option>3</option><option>4</option>
+    </select>
+
+    <label>Semester</label>
+    <select name="semester" required>
+     <option value="">-- Select Semester --</option>
+     <option value="1">1 Semester</option>
+     <option value="2">2 Semester</option>
+     <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+    </select>
+
+    <label>Subject</label>
+    <select name="subject" required>
+    <option value="">Select Subject</option>
+
+    {% for s in subjects %}
+    <option value="{{ s[0] }}">{{ s[0] }}</option>
+    {% endfor %}
+
+</select>
+    <label>Student Reg No</label>
+    <input type="text" name="regno" required>
+
+    <button type="submit">Next</button>
+</form>
+</div>
+</body>
+</html>

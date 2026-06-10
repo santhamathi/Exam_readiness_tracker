@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Manage Students</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#f4f6f8;
+}
+
+/* Header */
+.top-header{
+    background:#8B4513;
+    color:white;
+    padding:15px 25px;
+    display:flex;
+    justify-content:space-between;
+}
+.top-header h1{
+    margin:0;
+    font-size:20px;
+    
+}
+
+.top-header a{
+    color:white;
+    text-decoration:none;
+}
+
+/* Container */
+.container{
+    padding:30px;
+    max-width:1100px;
+    margin:auto;
+}
+
+h2{ color:#8B4513; }
+
+/* Form */
+form{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 5px 10px rgba(0,0,0,0.1);
+    margin-bottom:30px;
+}
+
+input, select{
+    padding:10px;
+    margin:5px;
+    width:150px;
+}
+
+button{
+    background:#8B4513;
+    color:white;
+    border:none;
+    padding:10px 15px;
+    cursor:pointer;
+}
+
+/* Table */
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+}
+
+th{
+    background:#8B4513;
+    color:white;
+}
+
+th,td{
+    padding:10px;
+    border:1px solid #ddd;
+    text-align:center;
+}
+
+/* Delete button */
+.delete{
+    color:red;
+    text-decoration:none;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-header">
+    <h1>Manage Students</h1>
+    <a href="/admin_dashboard">← Back to Dashboard</a>
+</div>
+
+<div class="container">
+
+<!-- ADD STUDENT FORM -->
+<form method="POST">
+    <input type="text" name="reg_no" placeholder="Reg No" required>
+    <input type="text" name="name" placeholder="Name" required>
+
+    <select name="dept">
+        <option>IT</option>
+        <option>CSE</option>
+        <option>ECE</option>
+    </select>
+
+    <input type="number" name="year" placeholder="Year" required>
+    <input type="number" name="semester" placeholder="Sem" required>
+
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="text" name="password" placeholder="Password" required>
+
+    <button type="submit">Add</button>
+</form>
+
+<!-- STUDENTS TABLE -->
+<table>
+<tr>
+    <th>ID</th>
+    <th>Reg No</th>
+    <th>Name</th>
+    <th>Dept</th>
+    <th>Year</th>
+    <th>Sem</th>
+    <th>Action</th>
+</tr>
+
+{% for s in students %}
+<tr>
+    <td>{{ s[0] }}</td>
+    <td>{{ s[1] }}</td>
+    <td>{{ s[2] }}</td>
+    <td>{{ s[3] }}</td>
+    <td>{{ s[4] }}</td>
+    <td>{{ s[5] }}</td>
+    <td>
+        <a href="/delete_student/{{ s[0] }}" class="delete">Delete</a>
+    </td>
+</tr>
+{% endfor %}
+
+</table>
+
+</div>
+
+</body>
+</html>

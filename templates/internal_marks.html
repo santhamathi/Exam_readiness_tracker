@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Internal Marks</title>
+<style>
+body{margin:0;font-family:Arial;background:#f4f6f8;}
+a{color:white;text-decoration:none;font-weight:bold;}
+.top-header{
+    background:#8B4513;color:white;
+    padding:15px 20px;display:flex;
+    justify-content:space-between;
+}
+.form-box{
+    max-width:550px;background:white;
+    margin:40px auto;padding:30px;
+    border-radius:10px;
+}
+h2{text-align:center;color:#8B4513;}
+input,button{
+    width:100%;padding:10px;margin:8px 0;
+}
+button{
+    background:#8B4513;color:white;
+    border:none;font-weight:bold;
+}
+</style>
+
+<script>
+function calcTotal() {
+    let a = Number(document.getElementById("assignment").value) || 0;
+    let m = Number(document.getElementById("mock").value) || 0;
+    let at = Number(document.getElementById("attendance").value) || 0;
+
+    
+
+    let total = a + m + at;
+    document.getElementById("total").value = total;
+}
+</script>
+</head>
+
+<body>
+<div class="top-header">
+<h2>Internal Marks</h2>
+<a href="/faculty_dashboard">Back</a>
+</div>
+
+<div class="form-box">
+<h2>Marks Entry</h2>
+
+<form method="POST" action="/save_marks">
+<input id="assignment"  name="assignment"placeholder="Assignment (10)" oninput="calcTotal()">
+<input id="mock" name="mock" placeholder="Mock Test (10)" oninput="calcTotal()">
+<input id="attendance" name="attendance" placeholder="Attendance (5)" oninput="calcTotal()">
+
+<input id="syllabus" name="unit_percent" placeholder="Syllabus Completion (%)" >
+
+
+<input id="total" name="total" placeholder="Total Internal Marks" readonly>
+
+<button type="submit">Save Marks</button>
+</form>
+</div>
+</body>
+</html>

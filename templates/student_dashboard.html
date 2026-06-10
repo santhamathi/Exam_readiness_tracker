@@ -1,51 +1,245 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Student Dashboard</title>
+<meta charset="UTF-8">
+<title>Academic Dashboard</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#f4f6f8;
+}
+
+/* Header */
+.top-header{
+    background:#8B4513;
+    color:white;
+    padding:15px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    font-weight:bold;
+}
+
+/* Container */
+.dashboard{
+    padding:40px;
+    max-width:1100px;
+    margin:auto;
+}
+
+h2{ color:#8B4513; }
+.info{ color:#555; margin-bottom:25px; }
+
+/* Cards */
+.cards{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-bottom:30px;
+}
+
+.card{
+    flex:1;
+    min-width:250px;
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.1);
+    text-align:center;
+}
+
+.card h3{
+    margin-bottom:10px;
+    color:#8B4513;
+}
+
+/* Table */
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+    background:white;
+    box-shadow:0 5px 12px rgba(0,0,0,0.08);
+}
+
+th{
+    background:#8B4513;
+    color:white;
+}
+
+th,td{
+    padding:12px;
+    border:1px solid #ddd;
+    text-align:center;
+}
+
+/* Progress */
+.progress{
+    width:100%;
+    background:#ddd;
+    border-radius:25px;
+    margin-top:15px;
+}
+
+.progress-bar{
+    height:25px;
+    background:#8B4513;
+    border-radius:25px;
+    color:white;
+    text-align:center;
+    line-height:25px;
+}
+
+/* Risk */
+.risk-card{
+    margin-top:25px;
+    padding:15px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.safe{ background:#e6ffe6; color:green; }
+.danger{ background:#ffe6e6; color:red; }
+</style>
 </head>
+
 <body>
 
-<h2>Welcome {{ student[1] }}</h2>
+<header class="top-header">
+    <h1>Academic Readiness Dashboard</h1>
+    <div class="nav-links">
+        <a href="/old_questions">Previous papers</a>
+        <a href="/study_planner">Study Planner</a>
+        <a href="/time_overview">Time Overview</a>
+        <a href="/student_logout">Logout</a>
+    </div>
+</header>
 
-<p><b>Register No:</b> {{ student[2] }}</p>
-<p><b>Department:</b> {{ student[3] }}</p>
-<p><b>Semester:</b> {{ student[4] }}</p>
+<div class="dashboard">
 
-<hr>
+<h2>Welcome, {{ student_name }} 👋</h2>
+<div class="info">
+Reg No: {{ reg_no }} |
+Department: {{ department }} |
+Year: {{ year }}
+</div>
 
-<h3>Exam Readiness Score</h3>
-<h1>{{ score }}%</h1>
-<p>Status: <b>{{ status }}</b></p>
+<!-- Cards -->
+<div class="cards">
+    <div class="card">
+        <h3>Total Internal (All Subjects)</h3>
+        <h2>{{ total_internal }}</h2>
+    </div>
 
-<hr>
+    <div class="card">
+        <h3>Average Syllabus Completion</h3>
+        <h2>{{ syllabus_completion }}%</h2>
+    </div>
 
-<h3>Academic Summary</h3>
+    <div class="card">
+        <h3>Readiness Score</h3>
+        <h2>{{ readiness_score }}%</h2>
+
+<p>
+Status: 
+{% if status == "Risk" %}
+<span style="color:red;">🔴 Risk</span>
+{% elif status == "Medium" %}
+<span style="color:orange;">🟡 Medium Risk</span>
+{% else %}
+<span style="color:green;">🟢 Good</span>
+{% endif %}
+</p>
+    </div>
+</div>
+<!-- Subjects List -->
+<h3 style="color:#8B4513;">Subjects</h3>
+
 <ul>
-    <li>Attendance: {{ student[6] }}%</li>
-    <li>Assignment Marks: {{ student[7] }}%</li>
-    <li>Mock Test Score: {{ student[8] }}%</li>
-    <li>Syllabus Completion: {{ student[9] }}%</li>
+{% for s in subjects %}
+<li>{{ s[0] }}</li>
+{% endfor %}
 </ul>
 
-<hr>
+<!-- Subject Breakdown -->
 
-<h3>Subject-wise Assignment Performance</h3>
 
-<table border="1" cellpadding="10">
-    <tr>
-        <th>Subject</th>
-        <th>Assignment Mark</th>
-    </tr>
-    {% for sub in subjects %}
-    <tr>
-        <td>{{ sub[0] }}</td>
-        <td>{{ sub[1] }}</td>
-    </tr>
-    {% endfor %}
+<h3 style="color:#8B4513;">Internal Marks Breakdown</h3>
+
+<table>
+<tr>
+    <th>Subject</th>
+    <th>Attendance (5)</th>
+    <th>Mock (10)</th>
+    <th>Assignment (10)</th>
+    <th>Total</th>
+</tr>
+
+{% for m in marks %}
+<tr>
+    <td>{{ m[0] }}</td>
+    <td>{{ m[1] }}</td>
+    <td>{{ m[2] }}</td>
+    <td>{{ m[3] }}</td>
+
+    <!-- 🔥 TOTAL + STATUS -->
+    <td>
+        <b>{{ m[1] + m[2] + m[3] }}</b>
+
+        {% if (m[1] + m[2] + m[3]) < 15 %}
+        <span style="color:red;"> 🔴 Risk</span>
+        {% elif (m[1] + m[2] + m[3]) < 20 %}
+        <span style="color:orange;"> 🟡 Medium Risk</span>
+        {% else %}
+        <span style="color:green;"> 🟢 Good</span>
+        {% endif %}
+    </td>
+</tr>
+{% endfor %}
+
+{% if marks|length == 0 %}
+<tr>
+    <td colspan="5">No internal marks added yet.</td>
+</tr>
+{% endif %}
+
 </table>
 
-<br>
-<a href="/logout">Logout</a>
+<!-- Progress -->
+<h3 style="color:#8B4513; margin-top:25px;">Average Syllabus Progress</h3>
+
+<div class="progress">
+    <div class="progress-bar" style="width:{{ syllabus_completion }}%;">
+        {{ syllabus_completion }}%
+    </div>
+</div>
+
+<!-- Risk -->
+{% if readiness_score < 50 %}
+<div class="risk-card danger">
+⚠ You are At Risk! Improve your performance.
+</div>
+
+{% elif readiness_score < 70 %}
+<div class="risk-card" style="background:#fff3cd; color:#856404;">
+🟡 You are in Medium Risk. Try to improve your study consistency.
+</div>
+
+{% else %}
+<div class="risk-card safe">
+✅ You are performing well. Keep going!
+</div>
+{% endif %}
+
+</div>
 
 </body>
 </html>

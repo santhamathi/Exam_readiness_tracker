@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Risk Students</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+        }
+
+        /* Header */
+        .header{
+            background:#8B4513;
+            color:white;
+            padding:15px 25px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        .header a{
+            color:white;
+            text-decoration:none;
+            font-weight:bold;
+        }
+
+        h2 {
+            text-align: center;
+            margin: 20px;
+            color: white;
+        }
+
+        /* Form */
+        form {
+            text-align: center;
+            margin: 20px;
+        }
+
+        select, button {
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: 1px solid #aaa;
+            font-size: 14px;
+        }
+
+        button {
+            background-color: #8B4513;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #8B4513;
+        }
+
+        /* Table */
+        table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th {
+            background-color: #8B4513;
+            color: white;
+            padding: 12px;
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Risk Colors */
+        .high {
+            color: red;
+            font-weight: bold;
+        }
+
+        .medium {
+            color: orange;
+            font-weight: bold;
+        }
+
+        .safe {
+            color: green;
+            font-weight: bold;
+        }
+
+        /* Back Button */
+        .back {
+            display: block;
+            width: 200px;
+            margin: 25px auto;
+            padding: 10px;
+            text-align: center;
+            background: #8B4513;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .back:hover {
+            background: #8B4513;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    <h2>Risk Students Report</h2>
+    <a href="/faculty_dashboard">← Back to Dashboard</a>
+</div>
+
+<form method="get" action="/risk_students">
+    <select name="dept" required>
+        <option value="">Department</option>
+        <option value="CSE">CSE</option>
+        <option value="IT">IT</option>
+        <option value="ECE">ECE</option>
+    </select>
+
+    <button type="submit">View Report</button>
+</form>
+
+<table>
+    <tr>
+        <th>Reg No</th>
+        <th>Name</th>
+        <th>Department</th>
+        <th>Total Marks</th>
+        <th>Risk Status</th>
+    </tr>
+
+    {% for s in students %}
+    <tr>
+        <td>{{ s.reg_no }}</td>
+        <td>{{ s.name }}</td>
+        <td>{{ s.dept }}</td>
+        <td>{{ s.total }}</td>
+        <td>
+            {% if s.risk == "High Risk" %}
+                <span class="high">🔴 High Risk</span>
+            {% elif s.risk == "Medium Risk" %}
+                <span class="medium">🟠 Medium Risk</span>
+            {% else %}
+                <span class="safe">🟢 Safe</span>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

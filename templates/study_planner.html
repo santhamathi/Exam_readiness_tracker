@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Study Planner</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f4f1ec;
+}
+
+/* Header */
+.header{
+    background:#8B4513;
+    color:white;
+    padding:15px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.header a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+
+/* Container */
+.container{
+    max-width:1100px;
+    margin:40px auto;
+}
+
+/* Form Box */
+.form-box{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.08);
+    margin-bottom:30px;
+    text-align:center;
+}
+
+.form-box input{
+    padding:10px;
+    margin:10px;
+    width:25%;
+    border:1px solid #ccc;
+    border-radius:6px;
+}
+
+.form-box button{
+    padding:10px 22px;
+    background:#8B4513;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* Progress */
+.progress-container{
+    background:#ddd;
+    border-radius:20px;
+    height:25px;
+    margin-bottom:30px;
+}
+
+.progress-bar{
+    height:100%;
+    background:#8B4513;
+    border-radius:20px;
+    text-align:center;
+    color:white;
+    line-height:25px;
+    font-weight:bold;
+}
+
+/* Dashboard Card */
+.dashboard-card{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.08);
+    margin-bottom:30px;
+}
+
+/* Table */
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    box-shadow:0 6px 15px rgba(0,0,0,0.08);
+    border-radius:10px;
+}
+
+th{
+    background:#8B4513;
+    color:white;
+}
+
+th, td{
+    padding:12px;
+    text-align:center;
+    border-bottom:1px solid #eee;
+}
+
+/* Status */
+.pending{
+    color:#b22222;
+    font-weight:bold;
+}
+
+.completed{
+    color:#2e8b57;
+    font-weight:bold;
+}
+
+.section-title{
+    margin:25px 0 15px 0;
+    color:#8B4513;
+}
+
+.empty-msg{
+    padding:15px;
+    font-weight:bold;
+    color:#777;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h2>Study Planner</h2>
+    <a href="/student_dashboard">← Back to Dashboard</a>
+</div>
+
+{% if overdue_count > 0 %}
+<div style="
+background:#ffe5e5;
+color:#b22222;
+padding:12px;
+border-radius:8px;
+margin:20px;
+font-weight:bold;
+text-align:center;">
+⚠ You have {{ overdue_count }} overdue study tasks!
+</div>
+{% endif %}
+
+
+
+<div class="container">
+
+<!-- Add Plan -->
+<div class="form-box">
+<form method="POST">
+<input type="text" name="subject" placeholder="Subject" required>
+<input type="text" name="topic" placeholder="Topic" required>
+<input type="date" name="study_date" required>
+<button type="submit">Add Plan</button>
+</form>
+</div>
+
+
+<!-- Progress -->
+<h3 class="section-title">Overall Progress: {{ progress }}%</h3>
+
+<div class="progress-container">
+<div class="progress-bar" style="width:{{ progress }}%;">
+{{ progress }}%
+</div>
+</div>
+
+<!-- Today Plans -->
+<h3 class="section-title">📅 Today's Plans</h3>
+
+<table>
+
+<tr>
+<th>Subject</th>
+<th>Topic</th>
+<th>Status</th>
+</tr>
+
+{% if today_plans|length == 0 %}
+
+<tr>
+<td colspan="3" class="empty-msg">No plans for today 🎉</td>
+</tr>
+
+{% endif %}
+
+{% for plan in today_plans %}
+
+<tr>
+<td>{{ plan[2] }}</td>
+<td>{{ plan[3] }}</td>
+
+<td>
+
+{% if plan[5] == "Pending" %}
+<span class="pending">Pending</span>
+{% else %}
+<span class="completed">Completed</span>
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<br><br>
+
+<!-- All Plans -->
+<h3 class="section-title">All Study Plans</h3>
+
+<table>
+
+<tr>
+<th>Subject</th>
+<th>Topic</th>
+<th>Date</th>
+<th>Status</th>
+<th>Action</th>
+</tr>
+
+{% for plan in plans %}
+
+<tr>
+
+<td>{{ plan[2] }}</td>
+<td>{{ plan[3] }}</td>
+<td>{{ plan[4] }}</td>
+
+<td>
+
+{% if plan[4] < today and plan[5] != "Completed" %}
+<span style="color:red;font-weight:bold;">Overdue</span>
+
+{% elif plan[5] == "Pending" %}
+<span class="pending">Pending</span>
+
+{% else %}
+<span class="completed">Completed</span>
+{% endif %}
+
+</td>
+
+<td>
+
+{% if plan[5] != "Completed" %}
+<a href="/mark_completed/{{ plan[0] }}" 
+style="color:green; font-weight:bold;">✔ Complete</a>
+{% endif %}
+
+&nbsp; | &nbsp;
+
+<a href="/delete_plan/{{ plan[0] }}" 
+style="color:red; font-weight:bold;">🗑 Delete</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#f4f6f8;
+}
+
+/* Header */
+.top-header{
+    background:#8B4513;
+    color:white;
+    padding:15px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.top-header h1{
+    margin:0;
+}
+
+.nav-links a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    font-weight:bold;
+}
+
+/* Container */
+.dashboard{
+    padding:40px;
+    max-width:1100px;
+    margin:auto;
+}
+
+h2{ color:#8B4513; }
+.info{ color:#555; margin-bottom:25px; }
+
+/* Cards */
+.cards{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+    margin-bottom:30px;
+}
+
+.card{
+    flex:1;
+    min-width:200px;
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.1);
+    text-align:center;
+}
+
+.card h3{
+    margin-bottom:10px;
+    color:#8B4513;
+}
+
+.card h2{
+    margin:0;
+}
+
+/* Buttons */
+.actions{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    flex:1;
+    min-width:220px;
+    padding:15px;
+    background:#8B4513;
+    color:white;
+    text-decoration:none;
+    text-align:center;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.btn:hover{
+    background:#5c2f0c;
+}
+
+/* Risk Color */
+.risk{
+    color:red;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Header -->
+<header class="top-header">
+    <h1>Admin Dashboard</h1>
+    <div class="nav-links">
+        <a href="/admin_dashboard">Home</a>
+        <a href="/admin_logout">Logout</a>
+    </div>
+</header>
+
+<!-- Dashboard Content -->
+<div class="dashboard">
+
+<h2>Welcome, Admin 👋</h2>
+<div class="info">
+Manage Students, Faculty, Subjects & Monitor Performance
+</div>
+
+<!-- Cards -->
+<div class="cards">
+    <div class="card">
+        <h3>Total Students</h3>
+        <h2>{{ students }}</h2>
+    </div>
+
+    <div class="card">
+        <h3>Total Faculty</h3>
+        <h2>{{ faculty }}</h2>
+    </div>
+
+    <div class="card">
+        <h3>Total Subjects</h3>
+        <h2>{{ subjects }}</h2>
+    </div>
+
+    <div class="card">
+        <h3>Risk Students</h3>
+        <h2 class="risk">{{ risk }}</h2>
+    </div>
+</div>
+
+<!-- Actions -->
+<div class="actions">
+    <a href="/manage_students" class="btn">Manage Students</a>
+    <a href="/manage_faculty" class="btn">Manage Faculty</a>
+    <a href="/manage_subjects" class="btn">Manage Subjects</a>
+    <a href="/admin_high_risk_students" class="btn">Risk Students</a>
+    
+</div>
+
+</div>
+
+</body>
+</html>

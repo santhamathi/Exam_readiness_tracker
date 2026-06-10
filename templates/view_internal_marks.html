@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Internal Marks View</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+}
+
+/* Header */
+.header{
+    background:#8B4513;
+    color:white;
+    padding:15px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.header a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+/* Form */
+form {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px;
+    flex-wrap: wrap;
+}
+
+select, button {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+    font-size: 14px;
+}
+
+/* Button */
+button {
+    background-color: #8B4513;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+button:hover {
+    background-color: #8B4513;
+}
+
+/* Table */
+table {
+    border-collapse: collapse;
+    width: 90%;
+    margin: auto;
+    background: white;
+}
+
+th {
+    background-color: #8B4513;
+    color: white;
+    padding: 10px;
+}
+
+td {
+    padding: 8px;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Links */
+a {
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+a:hover {
+    color: #8B4513;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+    <h2>Internal Marks</h2>
+    <a href="/faculty_dashboard">← Back to Dashboard</a>
+</div>
+
+
+<form method="POST">
+
+
+    <select name="year">
+        <option value="">Year</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+    </select>
+
+    <select name="semester">
+        <option value="">Semester</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+    </select>
+
+   <select name="subject">
+<option value="">Subject</option>
+
+<option>Programming in C</option>
+<option>Engineering Graphics</option>
+<option>Object Oriented Programming</option>
+<option>Computer Architecture</option>
+<option>Python Programming</option>
+<option>Database Management Systems</option>
+<option>Mobile Application Development</option>
+<option>Computer Networks</option>
+<option>Software Engineering</option>
+<option>Web Technology</option>
+<option>Data Mining</option>
+<option>Cloud Computing</option>
+<option>Business Intelligence</option>
+<option>Cyber Security</option>
+<option>Seminar</option>
+
+<option>Basic Electrical Engineering</option>
+<option>Engineering Chemistry</option>
+<option>Network Analysis</option>
+<option>Control Systems</option>
+<option>Digital Signal Processing</option>
+<option>Optical Communication</option>
+<option>Satellite Communication</option>
+
+</select>
+
+       <!-- View Button -->
+    <button type="submit" formaction="/view_internal_marks">
+        View Marks 
+    </button>
+
+    <!-- Download Button -->
+    <button type="submit" formaction="/download_excel">
+        Download Excel 📥
+    </button>
+
+
+</form>
+
+<table>
+<tr>
+    <th>Reg No</th>
+    <th>Dept</th>
+    <th>Year</th>
+    <th>Sem</th>
+    <th>Subject</th>
+    <th>Assignment</th>
+    <th>Mock</th>
+    <th>Attendance</th>
+    <th>Syllabus %</th>
+    <th>Total</th>
+</tr>
+
+{% for m in marks %}
+<tr>
+    <td>{{m.reg_no}}</td>
+    <td>{{m.dept}}</td>
+    <td>{{m.year}}</td>
+    <td>{{m.semester}}</td>
+    <td>{{m.subject}}</td>
+    <td>{{m.assignment}}</td>
+    <td>{{m.mock}}</td>
+    <td>{{m.attendance}}</td>
+    <td>{{m.unit_percent}}</td>
+    <td>{{m.total}}</td>
+</tr>
+{% endfor %}
+
+</table>
+
+</body>
+</html>

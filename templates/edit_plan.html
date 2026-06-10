@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Study Plan</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f1eb;   /* light cream background */
+}
+
+.main-container {
+    width: 500px;
+    margin: 80px auto;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+    border-top: 6px solid #6b4226;  /* brown top border */
+}
+
+.title {
+    text-align: center;
+    color: #6b4226;
+    margin-bottom: 20px;
+}
+
+.form-box label {
+    font-weight: bold;
+    color: #6b4226;
+}
+
+.form-box input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 15px;
+    border-radius: 5px;
+    border: 1px solid #d2b48c;
+}
+
+.update-btn {
+    width: 100%;
+    padding: 10px;
+    background: #6b4226;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.update-btn:hover {
+    background: #4e2f1a;
+}
+
+.back-btn {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #6b4226;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<div class="main-container">
+
+    <h2 class="title">Edit Study Plan</h2>
+
+    <form method="POST" class="form-box">
+
+        <label>Subject</label>
+        <input type="text" name="subject" value="{{ plan[2] }}" required>
+
+        <label>Topic</label>
+        <input type="text" name="topic" value="{{ plan[3] }}" required>
+
+        <label>Study Date</label>
+        <input type="date" name="study_date" value="{{ plan[4] }}" required>
+
+        <button type="submit" class="update-btn">
+            Update Plan
+        </button>
+
+    </form>
+
+    <a href="/study_planner" class="back-btn">⬅ Back</a>
+
+</div>
+
+</body>
+</html>

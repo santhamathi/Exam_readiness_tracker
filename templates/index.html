@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Student Management System</title>
+<title>Exam Preparation & Academic Readiness Tracker</title>
+
 
 <style>
 body {
@@ -10,7 +11,11 @@ body {
     font-family: Arial, sans-serif;
     background:#f4f6f8;
 }
-
+.dashboard-icon{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
 /* ===== Header ===== */
 .top-header {
     background:#8B4513; /* brown */
@@ -101,43 +106,45 @@ body {
 
 <!-- ===== Header ===== -->
 <header class="top-header">
-    <h1>Student Management System</h1>
+    <h1>Exam Preparation & Academic Readiness Tracker</h1>
+
     <nav>
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Features</a>
-        <a href="#">Contact</a>
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/features">Features</a>
+        <a href="/contact">Contact</a>
     </nav>
 </header>
 
 <!-- ===== Homepage Cards ===== -->
 <main class="home-cards">
-    <h2>Welcome to the Student Management System</h2>
-    <p>Choose your dashboard to navigate and manage your activities</p>
+    <h2>Welcome to the Exam Preparation Tracker</h2>
+<p>Track your study progress and exam readiness</p>
+
 
     <div class="cards-container">
         <!-- Student -->
         <div class="card">
-            <img src="images/student.png" alt="Student">
+            <img src="{{ url_for('static', filename='images/student.png') }}" class="dashboard-icon">
             <h3>Student Dashboard</h3>
             <p>Go to your personal dashboard</p>
-            <a href="student.html" class="btn">Go to Student Dashboard</a>
+            <a href="/student_login" class="btn">Student Login</a>
         </div>
 
         <!-- Faculty -->
         <div class="card">
-            <img src="images/faculty.png" alt="Faculty">
+            <img src="{{ url_for('static', filename='images/faculty.png') }}" class="dashboard-icon">
             <h3>Faculty Dashboard</h3>
             <p>Manage student performance</p>
-            <a href="faculty.html" class="btn">Go to Faculty Dashboard</a>
+            <a href="/faculty_login" class="btn">Faculty Login</a>
         </div>
 
         <!-- Admin -->
         <div class="card">
-            <img src="images/admin.png" alt="Admin">
+            <img src="{{ url_for('static', filename='images/admin.png') }}" class="dashboard-icon">
             <h3>Admin Dashboard</h3>
             <p>Manage students & faculty</p>
-            <a href="admin.html" class="btn">Go to Admin Dashboard</a>
+            <a href="/admin_login" class="btn">Admin Login</a>
         </div>
     </div>
 </main>
