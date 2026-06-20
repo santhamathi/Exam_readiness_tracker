@@ -124,6 +124,18 @@ Open in Browser
 http://localhost:5000
 ```
 
+Login Page
+<img width="1351" height="663" alt="home page" src="https://github.com/user-attachments/assets/2e233fd9-0087-48f1-9357-ca2321a453bd" />
+
+Student Dashboard
+<img width="1312" height="571" alt="Screenshot 2026-06-20 211937" src="https://github.com/user-attachments/assets/5f2ca968-18cd-4dfd-97e4-a03c6142d7cd" />
+<img width="1314" height="376" alt="Screenshot 2026-06-20 212000" src="https://github.com/user-attachments/assets/1d96f5ab-38ef-454b-ae24-7c38a58e92ef" />
+
+Faculty Dashboard
+<img width="1308" height="579" alt="Screenshot 2026-06-20 212417" src="https://github.com/user-attachments/assets/f966b56a-3df9-4dda-bbab-7da268073a6c" />
+
+Admin Dashboard
+<img width="1353" height="659" alt="admin dashboard" src="https://github.com/user-attachments/assets/0e952901-84b0-469e-89c1-5c15410685f3" />
 
 
 Contributors
